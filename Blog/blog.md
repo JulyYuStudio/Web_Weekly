@@ -38,6 +38,8 @@
 (https://labuladong.github.io/algo/home/)
 (https://amoshk.top/)
 (https://lixiaolai.com/#/)
+(http://zhangwenli.com/)
+(https://blog.simplenaive.cn/)
 
 
 

@@ -10,6 +10,14 @@ https://easybangumi.org/
 
  ![20240515165710.png](imgs/20240515165710.png)
 
+learnopengl-cn
+
+https://learnopengl-cn.github.io/
+
+这里是LearnOpenGL教程的中文翻译，英文版的地址为：https://learnopengl.com/
+
+从最基础最简单的知识开始学习OpenGL，个人认为是一份入门的资料。
+
 
 ## 🤡好玩的
 

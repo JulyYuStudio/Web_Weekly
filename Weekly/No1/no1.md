@@ -1,6 +1,8 @@
+## 📖好文章
+* 📝[Android: From touch gestures to model-view-projection (MVP) matrix with GLM](http://www.anandmuralidhar.com/blog/android/mvp-glm-touch/#touch-gesture)
+* 📝[淘特 Flutter 流式场景的深度优化](https://mp.weixin.qq.com/s?__biz=Mzg4MjE5OTI4Mw==&mid=2247494804&idx=1&sn=dfc277b0b1eb9f101b01ba3a44bf7596&source=41#wechat_redirect)
 
-
-## 🌏好资源
+## 📚好资源
 
 纯纯看番
 
@@ -19,7 +21,7 @@ https://learnopengl-cn.github.io/
 从最基础最简单的知识开始学习OpenGL，个人认为是一份入门的资料。
 
 
-## 🤡好玩的
+## 🎮好玩的
 
 SU7 网页的炫酷特效
 
@@ -32,7 +34,7 @@ https://gamemcu.com/su7/
 
  ## 📝记录
 
-最近在学`CameraX`一直想计划用`OpenGL`+`CameraX`玩一些有趣的东西。正好看到`CameraX`内部的`OpenGlRenderer`也用到了`OpenGL`可以阅读学习借鉴一下。
+最近在学`CameraX`一直想计划用`OpenGL`+`CameraX`玩一些有趣的东西(滤镜、特效等)。正好看到`CameraX`内部的`OpenGlRenderer`也用到`OpenGL`可以阅读学习借鉴一下。
 
  https://github.com/androidx/androidx/blob/androidx-main/camera/camera-core/src/main/java/androidx/camera/core/processing/OpenGlRenderer.java
 

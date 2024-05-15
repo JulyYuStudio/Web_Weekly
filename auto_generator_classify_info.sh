@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# 创建分类md文档
     # 遍历文件夹中的所有文件
     for file in $(find . -name "*.md"); do
       # 判断文件是否存在

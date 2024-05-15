@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# 统计## 文本标签类型
 # 创建一个空数组，用于存储提取的文本信息
 declare -a text_array=()
 

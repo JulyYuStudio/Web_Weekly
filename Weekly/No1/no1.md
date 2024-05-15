@@ -1,12 +1,6 @@
 
 
-
-## 好文章
-
-## 好工具
-
-
-## 好资源
+## 🌏好资源
 
 纯纯看番
 
@@ -17,7 +11,7 @@ https://easybangumi.org/
  ![20240515165710.png](imgs/20240515165710.png)
 
 
-## 好玩的
+## 🤡好玩的
 
 SU7 网页的炫酷特效
 
@@ -27,3 +21,10 @@ SU7 网页的炫酷特效
 
 https://gamemcu.com/su7/
  ![20240515164354.png](imgs/20240515164354.png)
+
+ ## 📝记录
+
+最近在学`CameraX`一直想计划用`OpenGL`+`CameraX`玩一些有趣的东西。正好看到`CameraX`内部的`OpenGlRenderer`也用到了`OpenGL`可以阅读学习借鉴一下。
+
+ https://github.com/androidx/androidx/blob/androidx-main/camera/camera-core/src/main/java/androidx/camera/core/processing/OpenGlRenderer.java
+

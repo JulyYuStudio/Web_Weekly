@@ -1,4 +1,7 @@
- 
+
+## 📖好文章
+* 📄[货拉拉司机Android端内存治理实践](https://mp.weixin.qq.com/s/8LLI_BvsLj938jqMdOlTWg) 
+
 ## 🎮好玩的
 
 **Pokemon Cards**
@@ -21,6 +24,8 @@ https://poke-holo.simey.me/
 
 **安卓客户端权限**
 
-最近做`Android`权限库有感，原生的危险权限以及特殊权限申请接口设计个人感觉不太好用，另外还存在碎片化严重问题其次还有国内产商特殊定制化等场景对于开发者也非常不友好。推荐比较好的权限兼容开源库:[XXPermisions](https://github.com/getActivity/XXPermissions)对各种系统版本权限申请以及不同机型做了适配处理。
+最近做`Android`权限库有感，原生的危险权限以及特殊权限申请接口设计个人感觉不太好用，另外还存在碎片化严重问题其次还有国内产商特殊定制化等场景。推荐比较好的权限兼容开源库:[XXPermisions](https://github.com/getActivity/XXPermissions)对各种系统版本权限申请以及不同机型做了适配处理。
 
 此外感慨一下做`Android`开发得多看看开发文档，版本适配路漫漫：[AndroidVersion](https://developer.android.com/about/versions?hl=zh-cn)
+
+

@@ -34,7 +34,7 @@ https://gamemcu.com/su7/
 
  ## 📝记录
 
-最近在学`CameraX`一直想计划用`OpenGL`+`CameraX`玩一些有趣的东西(滤镜、特效等)。正好看到`CameraX`内部的`OpenGlRenderer`也用到`OpenGL`可以阅读学习借鉴一下。
+最近在看`CameraX`一直想计划用`OpenGL`+`CameraX`玩一些有趣的东西(滤镜、特效等)。正巧翻阅`CameraX`内部源码发现内部代码中`OpenGlRenderer`用到`OpenGL`，值得借鉴学习一下。
 
  https://github.com/androidx/androidx/blob/androidx-main/camera/camera-core/src/main/java/androidx/camera/core/processing/OpenGlRenderer.java
 

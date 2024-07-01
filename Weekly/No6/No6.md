@@ -1,8 +1,7 @@
 
 ## 📖好文章
 * 📄[Exploring Thread Implementation& Isolates in Flutter for Better Performance](https://medium.com/@ahmedtahaelelemy/exploring-thread-implementation-isolates-in-flutter-for-better-performance-55a1569ffbb9)
-* 📄
-* 📄
+
 
 ## 🎮好玩的
 

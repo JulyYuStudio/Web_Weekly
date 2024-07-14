@@ -4,3 +4,6 @@
 * [周刊No4](Weekly/No4/No4.md)
 * [周刊No5](Weekly/No5/No5.md)
 * [周刊No6](Weekly/No6/No6.md)
+* [周刊No7](Weekly/No7/No7.md)
+* [周刊No8](Weekly/No8/No8.md)
+* [周刊No9](Weekly/No9/No9.md)

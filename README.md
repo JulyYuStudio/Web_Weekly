@@ -1,4 +1,5 @@
 * [周刊No1](Weekly/No1/No1.md)
+* [周刊No10](Weekly/No10/No10.md)
 * [周刊No2](Weekly/No2/No2.md)
 * [周刊No3](Weekly/No3/No3.md)
 * [周刊No4](Weekly/No4/No4.md)

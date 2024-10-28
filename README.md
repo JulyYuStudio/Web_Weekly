@@ -10,6 +10,7 @@
 * [周刊No18](Weekly/No18/No18.md)
 * [周刊No19](Weekly/No19/No19.md)
 * [周刊No2](Weekly/No2/No2.md)
+* [周刊No20](Weekly/No20/No20.md)
 * [周刊No3](Weekly/No3/No3.md)
 * [周刊No4](Weekly/No4/No4.md)
 * [周刊No5](Weekly/No5/No5.md)

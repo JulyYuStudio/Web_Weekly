@@ -11,6 +11,7 @@
 * [周刊No6](Weekly/No6/No6.md)
 * [周刊No7](Weekly/No7/No7.md)
 * [周刊No9](Weekly/No9/No9.md)
+* [周刊No23](Weekly/No23/No23.md)
 * [周刊No15](Weekly/No15/No15.md)
 * [周刊No12](Weekly/No12/No12.md)
 * [周刊No13](Weekly/No13/No13.md)

@@ -57,8 +57,10 @@ def read_markdown_file(file_path,write,writeEnd):
                 # 去除行尾的换行符
                 line = line.strip().rstrip('\n')
                 if len(line) > 0:
+                    ## 标题部分
                     if(line.startswith('## ')):
                         title = line.replace('## ', "").strip()
+                        # 是文章标题情况下
                         if(title == '📖好文章'):
                             isArtiles = True
                         else: 
@@ -67,10 +69,11 @@ def read_markdown_file(file_path,write,writeEnd):
                                 write(content.strip())
                             isArtiles = False
                         newline = template.templateRedTitleH2.substitute(h2 = title)
+                        ## 写主题TXT
                         write(newline.strip())
-                        # print(f"{newline.strip()}")
+                    ## 内容部分
                     else:
-                        # print(f" content ===> isArtiles {isArtiles} {line}")
+                        ## 文章主题内容
                         if isArtiles: 
                             line = line.replace('* ', "").strip()
                             results = match_markdown_links(line.strip())
@@ -81,21 +84,24 @@ def read_markdown_file(file_path,write,writeEnd):
                             artContents += url.strip()
                             # print(f"isArtiles ===> {newline} ")
                         else:
+                        ## 其他主题内容
                             if(line.startswith('**')):
                                 # print(f"title ===> {line} ")
                                 title = line.replace('*', "").strip()
                                 title = template.templateRedTitleH3.substitute(h3 = title)
                                 write(title.strip())
+                            elif (line.strip().startswith('* [')):
+                                line = line.replace('* ', "").strip()
+                                results = match_markdown_links(line)
+                                write(results[0][0] + ":" + results[0][1])    
                             elif is_url(line):
                                 # print(f"is_url ===> {line} ")
                                 url = template.templateRedUrl.substitute(url = line)
                                 write(url.strip())
                             elif (line.strip().startswith('![')):
-                                imgPath = match_markdown_images(line);
-                                # print(f"imgPath ===> {imgPath[0][1]} {file_path.rsplit('/', 1)[0]}")
+                                imgPath = match_markdown_images(line)
                                 write_pic(file_path.rsplit('/', 1)[0]+ "/" + imgPath[0][1])
                             else:
-                                # print(f"line ===> {line} ")
                                 newLine = template.templateContent.substitute(content = line.strip())
                                 write(newLine.strip())
 
@@ -114,7 +120,6 @@ def md2docx(file_path):
 
 if __name__ == "__main__":
     # 在这里输入你要读取的文件的路径
-    file_path = '../Weekly/No21/No21.md'
     parser = argparse.ArgumentParser(description='一个复杂的命令行参数示例')
     parser.add_argument('-input_path',type=str, help='路径')
     parser.add_argument('-output_name',type=str, help='名称')

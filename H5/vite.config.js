@@ -12,9 +12,9 @@ function copyWeeklyFiles() {
     name: 'copy-weekly-files',
     buildStart() {
       // 确保public/Weekly目录存在
-      const publicWeeklyDir = path.resolve(__dirname, 'public/Weekly')
-      if (!fs.existsSync(path.resolve(__dirname, 'public'))) {
-        fs.mkdirSync(path.resolve(__dirname, 'public'))
+      const publicWeeklyDir = path.resolve(__dirname, 'Weekly')
+      if (!fs.existsSync(path.resolve(__dirname, 'Weekly'))) {
+        fs.mkdirSync(path.resolve(__dirname, 'Weekly'))
       }
       if (!fs.existsSync(publicWeeklyDir)) {
         fs.mkdirSync(publicWeeklyDir)

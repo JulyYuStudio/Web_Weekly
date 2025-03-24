@@ -50,7 +50,7 @@ export default {
         {
                 "id": 1,
                 "title": "第1期",
-                "createTime": 1715762550000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240515164354.png"
         
         },
@@ -58,7 +58,7 @@ export default {
         {
                 "id": 2,
                 "title": "第2期",
-                "createTime": 1716256970000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240521100428.png"
         
         },
@@ -66,7 +66,7 @@ export default {
         {
                 "id": 3,
                 "title": "第3期",
-                "createTime": 1716773555000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240527165107.png"
         
         },
@@ -74,7 +74,7 @@ export default {
         {
                 "id": 4,
                 "title": "第4期",
-                "createTime": 1717338844000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240607140450.png"
         
         },
@@ -82,7 +82,7 @@ export default {
         {
                 "id": 5,
                 "title": "第5期",
-                "createTime": 1718069436000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240611180342.png"
         
         },
@@ -90,7 +90,7 @@ export default {
         {
                 "id": 6,
                 "title": "第6期",
-                "createTime": 1718588643000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240621153738.png"
         
         },
@@ -98,7 +98,7 @@ export default {
         {
                 "id": 7,
                 "title": "第7期",
-                "createTime": 1719194149000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240624114254.png"
         
         },
@@ -106,7 +106,7 @@ export default {
         {
                 "id": 8,
                 "title": "第8期",
-                "createTime": 1719798410000,
+                "createTime": 1742824700000,
                 "img": ""
         
         },
@@ -114,7 +114,7 @@ export default {
         {
                 "id": 9,
                 "title": "第9期",
-                "createTime": 1720402517000,
+                "createTime": 1742824700000,
                 "img": "imgs/20240714224605.png"
         
         },
@@ -122,7 +122,7 @@ export default {
         {
                 "id": 10,
                 "title": "第10期",
-                "createTime": 1721007980000,
+                "createTime": 1742824699000,
                 "img": ""
         
         },
@@ -130,7 +130,7 @@ export default {
         {
                 "id": 11,
                 "title": "第11期",
-                "createTime": 1721614249000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240729093052.png"
         
         },
@@ -138,7 +138,7 @@ export default {
         {
                 "id": 12,
                 "title": "第12期",
-                "createTime": 1722217853000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240805085854.png"
         
         },
@@ -146,7 +146,7 @@ export default {
         {
                 "id": 13,
                 "title": "第13期",
-                "createTime": 1722869272000,
+                "createTime": 1742824699000,
                 "img": ""
         
         },
@@ -154,7 +154,7 @@ export default {
         {
                 "id": 14,
                 "title": "第14期",
-                "createTime": 1723429770000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240816105050.png"
         
         },
@@ -162,7 +162,7 @@ export default {
         {
                 "id": 15,
                 "title": "第15期",
-                "createTime": 1724054750000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240819160754.png"
         
         },
@@ -170,7 +170,7 @@ export default {
         {
                 "id": 16,
                 "title": "第16期",
-                "createTime": 1724638031000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240827095301.png"
         
         },
@@ -178,7 +178,7 @@ export default {
         {
                 "id": 17,
                 "title": "第17期",
-                "createTime": 1725413961000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240908222257.png"
         
         },
@@ -186,7 +186,7 @@ export default {
         {
                 "id": 18,
                 "title": "第18期",
-                "createTime": 1725846662000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240910094039.png"
         
         },
@@ -194,7 +194,7 @@ export default {
         {
                 "id": 19,
                 "title": "第19期",
-                "createTime": 1726623970000,
+                "createTime": 1742824699000,
                 "img": "imgs/20240923165227.png"
         
         },
@@ -202,7 +202,7 @@ export default {
         {
                 "id": 20,
                 "title": "第20期",
-                "createTime": 1728351638000,
+                "createTime": 1742824700000,
                 "img": "imgs/20241010095004.png"
         
         },
@@ -210,7 +210,7 @@ export default {
         {
                 "id": 21,
                 "title": "第21期",
-                "createTime": 1736214906220,
+                "createTime": 1742824700000,
                 "img": "imgs/20241118131824.png"
         
         },
@@ -218,7 +218,7 @@ export default {
         {
                 "id": 22,
                 "title": "第22期",
-                "createTime": 1733801721564,
+                "createTime": 1742824700000,
                 "img": "imgs/20250107160845.png"
         
         },
@@ -226,7 +226,7 @@ export default {
         {
                 "id": 23,
                 "title": "第23期",
-                "createTime": 1736733611899,
+                "createTime": 1742824700000,
                 "img": "imgs/20250113113156.png"
         
         },
@@ -234,7 +234,7 @@ export default {
         {
                 "id": 24,
                 "title": "第24期",
-                "createTime": 1737683230558,
+                "createTime": 1742824700000,
                 "img": "imgs/20250225153617.png"
         
         },
@@ -242,7 +242,7 @@ export default {
         {
                 "id": 25,
                 "title": "第25期",
-                "createTime": 1740925286899,
+                "createTime": 1742824700000,
                 "img": "imgs/20250303140153.png"
         
         },
@@ -250,7 +250,7 @@ export default {
         {
                 "id": 26,
                 "title": "第26期",
-                "createTime": 1741615582094,
+                "createTime": 1742824700000,
                 "img": "imgs/20250311100255.png"
         
         },
@@ -258,7 +258,7 @@ export default {
         {
                 "id": 27,
                 "title": "第27期",
-                "createTime": 1742043288813,
+                "createTime": 1742824700000,
                 "img": "imgs/20250317214223.png"
         
         },
@@ -266,7 +266,7 @@ export default {
         {
                 "id": 28,
                 "title": "第28期",
-                "createTime": 1742795636059,
+                "createTime": 1742824700000,
                 "img": ""
         
         }
@@ -291,178 +291,6 @@ export default {
     // 所有文章，不再根据年份过滤
     filteredWeeklies() {
       return this.weeklies;
-    }
-  },
-  data() {
-    return {
-      weeklies: [],
-      years: [],       // 存储所有年份
-      activeYear: null, // 当前选中的年份
-      // 内联周刊数据
-      weeklyData: [
-        {
-          "id": 1,
-          "title": "第1期",
-          "createTime": 1715762550000,
-          "img": "imgs/20240515164354.png"
-        },
-        {
-          "id": 2,
-          "title": "第2期",
-          "createTime": 1716256970000,
-          "img": "imgs/20240521100428.png"
-        },
-        {
-          "id": 3,
-          "title": "第3期",
-          "createTime": 1716773555000,
-          "img": "imgs/20240527165107.png"
-        },
-        {
-          "id": 4,
-          "title": "第4期",
-          "createTime": 1717338844000,
-          "img": "imgs/20240607140450.png"
-        },
-        {
-          "id": 5,
-          "title": "第5期",
-          "createTime": 1718069436000,
-          "img": "imgs/20240611180342.png"
-        },
-        {
-          "id": 6,
-          "title": "第6期",
-          "createTime": 1718588643000,
-          "img": "imgs/20240621153738.png"
-        },
-        {
-          "id": 7,
-          "title": "第7期",
-          "createTime": 1719194149000,
-          "img": "imgs/20240624114254.png"
-        },
-        {
-          "id": 8,
-          "title": "第8期",
-          "createTime": 1719798410000,
-          "img": ""
-        },
-        {
-          "id": 9,
-          "title": "第9期",
-          "createTime": 1720402517000,
-          "img": "imgs/20240714224605.png"
-        },
-        {
-          "id": 10,
-          "title": "第10期",
-          "createTime": 1721007980000,
-          "img": ""
-        },
-        {
-          "id": 11,
-          "title": "第11期",
-          "createTime": 1721614249000,
-          "img": "imgs/20240729093052.png"
-        },
-        {
-          "id": 12,
-          "title": "第12期",
-          "createTime": 1722217853000,
-          "img": "imgs/20240805085854.png"
-        },
-        {
-          "id": 13,
-          "title": "第13期",
-          "createTime": 1722869272000,
-          "img": ""
-        },
-        {
-          "id": 14,
-          "title": "第14期",
-          "createTime": 1723429770000,
-          "img": "imgs/20240816105050.png"
-        },
-        {
-          "id": 15,
-          "title": "第15期",
-          "createTime": 1724054750000,
-          "img": "imgs/20240819160754.png"
-        },
-        {
-          "id": 16,
-          "title": "第16期",
-          "createTime": 1724638031000,
-          "img": "imgs/20240827095301.png"
-        },
-        {
-          "id": 17,
-          "title": "第17期",
-          "createTime": 1725413961000,
-          "img": "imgs/20240908222257.png"
-        },
-        {
-          "id": 18,
-          "title": "第18期",
-          "createTime": 1725846662000,
-          "img": "imgs/20240910094039.png"
-        },
-        {
-          "id": 19,
-          "title": "第19期",
-          "createTime": 1726623970000,
-          "img": "imgs/20240923165227.png"
-        },
-        {
-          "id": 20,
-          "title": "第20期",
-          "createTime": 1728351638000,
-          "img": "imgs/20241010095004.png"
-        },
-        {
-          "id": 21,
-          "title": "第21期",
-          "createTime": 1736214906220,
-          "img": "imgs/20241118131824.png"
-        },
-        {
-          "id": 22,
-          "title": "第22期",
-          "createTime": 1733801721564,
-          "img": "imgs/20250107160845.png"
-        },
-        {
-          "id": 23,
-          "title": "第23期",
-          "createTime": 1736733611899,
-          "img": "imgs/20250113113156.png"
-        },
-        {
-          "id": 24,
-          "title": "第24期",
-          "createTime": 1737683230558,
-          "img": "imgs/20250225153617.png"
-        },
-        {
-          "id": 25,
-          "title": "第25期",
-          "createTime": 1740925286899,
-          "img": "imgs/20250303140153.png"
-        },
-        {
-          "id": 26,
-          "title": "第26期",
-          "createTime": 1741615582094,
-          "img": "imgs/20250311100255.png"
-        },
-        {
-          "id": 27,
-          "title": "第27期",
-          "createTime": 1742043288813,
-          "img": "imgs/20250317214223.png"
-        }
-      ]
     }
   },
   mounted() {

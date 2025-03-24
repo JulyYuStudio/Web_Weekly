@@ -1,0 +1,79 @@
+/* 主题变量定义 */
+:root {
+  /* 亮色主题（默认） */
+  --bg-primary: #fff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e0e0e0;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-tertiary: #999;
+  --border-color: #e0e0e0;
+  --accent-color: #4a6fa5;
+  --accent-hover: #3a5985;
+  --code-bg: #f5f5f5;
+  --blockquote-bg: #f9f9f9;
+  --table-header-bg: #f5f5f5;
+  --table-row-even: #f9f9f9;
+  --error-color: #e74c3c;
+  --error-bg: #fdf7f7;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 暗黑主题 */
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --bg-tertiary: #3a3a3a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+  --border-color: #444;
+  --accent-color: #6a8fc5;
+  --accent-hover: #7aa0d5;
+  --code-bg: #2a2a2a;
+  --blockquote-bg: #2a2a2a;
+  --table-header-bg: #2a2a2a;
+  --table-row-even: #252525;
+  --error-color: #e74c3c;
+  --error-bg: #3a2222;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 主题切换过渡动画 */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 主题切换按钮样式 */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 36px;
+    height: 36px;
+  }
+}

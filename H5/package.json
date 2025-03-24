@@ -1,0 +1,21 @@
+{
+  "name": "weekly-blog",
+  "version": "1.0.0",
+  "description": "A blog page to display weekly markdown files",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./scripts/updateWeeklyData.js && vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "marked": "^9.0.0",
+    "highlight.js": "^11.8.0",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "vite": "^4.4.9"
+  }
+}

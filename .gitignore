@@ -1,3 +1,9 @@
 markdown2docx/md2docx/
 markdown2docx/__pycache__/
 markdown2docx/myenv
+
+H5/node_modules
+H5/public
+H5/dist
+H5/static
+H5/.github

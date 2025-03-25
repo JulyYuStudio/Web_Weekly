@@ -14,8 +14,7 @@
     <div v-else class="weekly-content-wrapper">
       <div class="weekly-main-content">
         <h1 class="weekly-title">第{{ id }}期</h1>
-        <iframe v-if="iframeUrl" :src="iframeUrl" class="weekly-iframe" frameborder="0" ref="weeklyIframe" @load="handleIframeLoad"></iframe>
-        <div v-else class="markdown-content" ref="markdownContent" v-html="htmlContent"></div>
+        <div class="markdown-content" ref="markdownContent" v-html="htmlContent"></div>
       </div>
     </div>
     <button 
@@ -44,10 +43,8 @@ export default {
     return {
       loading: true,
       error: null,
-      markdownContent: '',
       htmlContent: '',
-      showBackToTop: false,
-      iframeUrl: ''
+      showBackToTop: false
     }
   },
   watch: {
@@ -74,73 +71,86 @@ export default {
     this.removeThemeChangeListener();
   },
   methods: {
-    async fetchMarkdownContent() {
+    fetchMarkdownContent() {
       this.loading = true;
       this.error = null;
       
-      try {
-        // 获取base URL，确保在不同部署环境下都能正确跳转
-        const baseUrl = import.meta.env.BASE_URL || '/';
-        // 构建完整的URL路径，考虑baseUrl配置
-        const weeklyUrl = `${baseUrl}Weekly/No${this.id}/No${this.id}.html`;
-        // 设置iframe的URL，而不是重定向
-        this.iframeUrl = weeklyUrl;
-        this.loading = false;
-      } catch (error) {
+      // 获取base URL，确保在不同部署环境下都能正确跳转
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      // 构建完整的URL路径，考虑baseUrl配置
+      const weeklyUrl = `${baseUrl}Weekly/No${this.id}/No${this.id}.html`;
+      
+      // 使用XMLHttpRequest对象替代fetch，在某些静态部署环境中可能更可靠
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', weeklyUrl, true);
+      
+      // 设置响应类型为text
+      xhr.responseType = 'text';
+      
+      // 处理加载完成事件
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          // 获取HTML文本内容
+          const htmlText = xhr.responseText;
+          
+          // 处理HTML内容中的相对路径，特别是图片路径
+          // 将相对路径转换为基于当前URL的绝对路径
+          this.htmlContent = this.processHtmlContent(htmlText);
+          
+          // 在下一个DOM更新周期应用主题
+          this.$nextTick(() => {
+            this.applyCurrentTheme();
+          });
+          
+          this.loading = false;
+        } else {
+          throw new Error(`HTTP error! status: ${xhr.status}`);
+        }
+      };
+      
+      // 处理错误事件
+      xhr.onerror = (error) => {
         console.error('加载周刊内容出错:', error);
+        this.error = '加载周刊内容失败: 网络错误或文件不存在';
+        this.loading = false;
+      };
+      
+      // 处理超时事件
+      xhr.ontimeout = () => {
+        console.error('加载周刊内容超时');
+        this.error = '加载周刊内容失败: 请求超时';
+        this.loading = false;
+      };
+      
+      // 发送请求
+      try {
+        xhr.send();
+      } catch (error) {
+        console.error('发送请求出错:', error);
         this.error = `加载周刊内容失败: ${error.message}`;
         this.loading = false;
       }
     },
     
-    // 处理iframe加载完成事件
-    handleIframeLoad() {
-      if (this.$refs.weeklyIframe) {
-        try {
-          // 尝试调整iframe高度以适应内容
-          this.adjustIframeHeight();
-          
-          // 尝试将iframe内部的样式应用主题
-          this.applyThemeToIframe();
-        } catch (error) {
-          console.error('处理iframe加载事件出错:', error);
-        }
-      }
+    // 处理HTML内容，修复相对路径
+    processHtmlContent(htmlText) {
+      // 获取base URL
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      // 构建周刊目录的基础路径
+      const weeklyBasePath = `${baseUrl}Weekly/No${this.id}/`;
+      
+      // 替换相对路径的图片引用
+      // 将 src="./Weekly/No1/imgs/xxx.png" 替换为 src="${weeklyBasePath}imgs/xxx.png"
+      return htmlText.replace(/src="\.\/Weekly\/No\d+\/imgs\//g, `src="${weeklyBasePath}imgs/`);
     },
     
-    // 调整iframe高度以适应内容
-    adjustIframeHeight() {
-      const iframe = this.$refs.weeklyIframe;
-      if (!iframe) return;
-      
-      try {
-        // 尝试获取iframe内容的高度
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        if (iframeDoc) {
-          const height = iframeDoc.body.scrollHeight;
-          // 设置最小高度为80vh，如果内容更长则使用内容高度
-          iframe.style.height = Math.max(height, window.innerHeight * 0.8) + 'px';
-        }
-      } catch (e) {
-        console.warn('无法调整iframe高度:', e);
-      }
-    },
-    
-    // 将当前主题应用到iframe内部
-    applyThemeToIframe() {
-      const iframe = this.$refs.weeklyIframe;
-      if (!iframe) return;
-      
-      try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        if (iframeDoc) {
-          // 获取当前主题
-          const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-          // 将主题应用到iframe的html元素上
-          iframeDoc.documentElement.setAttribute('data-theme', currentTheme);
-        }
-      } catch (e) {
-        console.warn('无法应用主题到iframe:', e);
+    // 应用当前主题到HTML内容
+    applyCurrentTheme() {
+      if (this.$refs.markdownContent) {
+        // 获取当前主题
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        // 将主题应用到内容的样式变量
+        this.$refs.markdownContent.setAttribute('data-theme', currentTheme);
       }
     },
     
@@ -164,8 +174,8 @@ export default {
       this.themeObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-            // 当主题变化时，重新应用主题到iframe
-            this.applyThemeToIframe();
+            // 当主题变化时，重新应用主题到HTML内容
+            this.applyCurrentTheme();
           }
         });
       });
@@ -205,16 +215,16 @@ export default {
   width: 100%;
 }
 
-/* iframe样式 */
-.weekly-iframe {
+/* 内容容器样式 */
+.markdown-content {
   width: 100%;
   min-height: 80vh; /* 设置最小高度为视口高度的80% */
-  border: none;
   overflow: auto;
   background-color: var(--bg-primary);
   border-radius: 8px;
   box-shadow: 0 2px 8px var(--shadow-color);
-  transition: height 0.3s ease;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 .back-button {

@@ -78,7 +78,7 @@ export default {
       // 获取base URL，确保在不同部署环境下都能正确跳转
       const baseUrl = import.meta.env.BASE_URL || '/';
       // 构建完整的URL路径，考虑baseUrl配置
-      const weeklyUrl = `${baseUrl}Weekly/No${this.id}/No${this.id}.html`;
+      const weeklyUrl = `${baseUrl}Weekly/No${this.id}/No${this.id}.md`;
       
       // 使用XMLHttpRequest对象替代fetch，在某些静态部署环境中可能更可靠
       const xhr = new XMLHttpRequest();
@@ -90,19 +90,49 @@ export default {
       // 处理加载完成事件
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
-          // 获取HTML文本内容
-          const htmlText = xhr.responseText;
+          // 获取Markdown文本内容
+          const mdText = xhr.responseText;
           
-          // 处理HTML内容中的相对路径，特别是图片路径
-          // 将相对路径转换为基于当前URL的绝对路径
-          this.htmlContent = this.processHtmlContent(htmlText);
+          // 处理Markdown内容中的相对路径，特别是图片路径
+          const processedMdText = this.processMarkdownContent(mdText);
           
-          // 在下一个DOM更新周期应用主题
-          this.$nextTick(() => {
-            this.applyCurrentTheme();
+          // 使用marked库将Markdown转换为HTML
+          import('marked').then(({ marked }) => {
+            import('highlight.js').then((hljs) => {
+              // 配置marked以使用highlight.js进行代码高亮
+              marked.setOptions({
+                highlight: function(code, lang) {
+                  if (lang && hljs.default.getLanguage(lang)) {
+                    return hljs.default.highlight(code, { language: lang }).value;
+                  }
+                  return hljs.default.highlightAuto(code).value;
+                },
+                breaks: true
+              });
+              
+              // 转换为HTML
+              this.htmlContent = marked.parse(processedMdText);
+              
+              // 在下一个DOM更新周期应用主题
+              this.$nextTick(() => {
+                this.applyCurrentTheme();
+              });
+              
+              this.loading = false;
+            }).catch(error => {
+              console.error('加载highlight.js失败:', error);
+              // 即使没有高亮也继续渲染
+              this.htmlContent = marked.parse(processedMdText);
+              this.$nextTick(() => {
+                this.applyCurrentTheme();
+              });
+              this.loading = false;
+            });
+          }).catch(error => {
+            console.error('加载marked库失败:', error);
+            this.error = '加载Markdown解析库失败';
+            this.loading = false;
           });
-          
-          this.loading = false;
         } else {
           throw new Error(`HTTP error! status: ${xhr.status}`);
         }
@@ -132,16 +162,28 @@ export default {
       }
     },
     
-    // 处理HTML内容，修复相对路径
-    processHtmlContent(htmlText) {
+    // 处理Markdown内容，修复相对路径
+    processMarkdownContent(mdContent) {
       // 获取base URL
       const baseUrl = import.meta.env.BASE_URL || '/';
       // 构建周刊目录的基础路径
       const weeklyBasePath = `${baseUrl}Weekly/No${this.id}/`;
       
       // 替换相对路径的图片引用
-      // 将 src="./Weekly/No1/imgs/xxx.png" 替换为 src="${weeklyBasePath}imgs/xxx.png"
-      return htmlText.replace(/src="\.\/Weekly\/No\d+\/imgs\//g, `src="${weeklyBasePath}imgs/`);
+      // 将 ![xxx](imgs/xxx.png) 替换为 ![xxx](./Weekly/No{id}/imgs/xxx.png)
+      return mdContent.replace(/!\[(.*?)\]\((imgs\/.*?)\)/g, `![$1](${weeklyBasePath}$2)`);
+    },
+    
+    // 处理HTML内容，修复相对路径
+    processHtmlContent(htmlContent) {
+      // 获取base URL
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      // 构建周刊目录的基础路径
+      const weeklyBasePath = `${baseUrl}Weekly/No${this.id}/`;
+      
+      // 替换相对路径的图片引用
+      // 将 <img src="imgs/xxx.png" 替换为 <img src="./Weekly/No{id}/imgs/xxx.png"
+      return htmlContent.replace(/<img\s+src="(imgs\/[^"]+)"/g, `<img src="${weeklyBasePath}$1"`);
     },
     
     // 应用当前主题到HTML内容

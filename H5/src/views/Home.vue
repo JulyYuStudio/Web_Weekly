@@ -44,234 +44,7 @@ export default {
       weeklies: [],
       years: [],       // 存储所有年份
       activeYear: null, // 当前选中的年份
-      // 内联周刊数据
-      weeklyData: [
-        
-        {
-                "id": 1,
-                "title": "第1期",
-                "createTime": 1715762550000,
-                "img": "imgs/20240515164354.png"
-        
-        },
-        
-        {
-                "id": 2,
-                "title": "第2期",
-                "createTime": 1716256970000,
-                "img": "imgs/20240521100428.png"
-        
-        },
-        
-        {
-                "id": 3,
-                "title": "第3期",
-                "createTime": 1716773555000,
-                "img": "imgs/20240527165107.png"
-        
-        },
-        
-        {
-                "id": 4,
-                "title": "第4期",
-                "createTime": 1717338844000,
-                "img": "imgs/20240607140450.png"
-        
-        },
-        
-        {
-                "id": 5,
-                "title": "第5期",
-                "createTime": 1718069436000,
-                "img": "imgs/20240611180342.png"
-        
-        },
-        
-        {
-                "id": 6,
-                "title": "第6期",
-                "createTime": 1718588643000,
-                "img": "imgs/20240621153738.png"
-        
-        },
-        
-        {
-                "id": 7,
-                "title": "第7期",
-                "createTime": 1719194149000,
-                "img": "imgs/20240624114254.png"
-        
-        },
-        
-        {
-                "id": 8,
-                "title": "第8期",
-                "createTime": 1719798410000,
-                "img": ""
-        
-        },
-        
-        {
-                "id": 9,
-                "title": "第9期",
-                "createTime": 1720402517000,
-                "img": "imgs/20240714224605.png"
-        
-        },
-        
-        {
-                "id": 10,
-                "title": "第10期",
-                "createTime": 1721007980000,
-                "img": ""
-        
-        },
-        
-        {
-                "id": 11,
-                "title": "第11期",
-                "createTime": 1721614249000,
-                "img": "imgs/20240729093052.png"
-        
-        },
-        
-        {
-                "id": 12,
-                "title": "第12期",
-                "createTime": 1722217853000,
-                "img": "imgs/20240805085854.png"
-        
-        },
-        
-        {
-                "id": 13,
-                "title": "第13期",
-                "createTime": 1722869272000,
-                "img": ""
-        
-        },
-        
-        {
-                "id": 14,
-                "title": "第14期",
-                "createTime": 1723429770000,
-                "img": "imgs/20240816105050.png"
-        
-        },
-        
-        {
-                "id": 15,
-                "title": "第15期",
-                "createTime": 1724054750000,
-                "img": "imgs/20240819160754.png"
-        
-        },
-        
-        {
-                "id": 16,
-                "title": "第16期",
-                "createTime": 1724638031000,
-                "img": "imgs/20240827095301.png"
-        
-        },
-        
-        {
-                "id": 17,
-                "title": "第17期",
-                "createTime": 1725413961000,
-                "img": "imgs/20240908222257.png"
-        
-        },
-        
-        {
-                "id": 18,
-                "title": "第18期",
-                "createTime": 1725846662000,
-                "img": "imgs/20240910094039.png"
-        
-        },
-        
-        {
-                "id": 19,
-                "title": "第19期",
-                "createTime": 1726623970000,
-                "img": "imgs/20240923165227.png"
-        
-        },
-        
-        {
-                "id": 20,
-                "title": "第20期",
-                "createTime": 1728351638000,
-                "img": "imgs/20241010095004.png"
-        
-        },
-        
-        {
-                "id": 21,
-                "title": "第21期",
-                "createTime": 1736214906220,
-                "img": "imgs/20241118131824.png"
-        
-        },
-        
-        {
-                "id": 22,
-                "title": "第22期",
-                "createTime": 1733801721564,
-                "img": "imgs/20250107160845.png"
-        
-        },
-        
-        {
-                "id": 23,
-                "title": "第23期",
-                "createTime": 1736733611899,
-                "img": "imgs/20250113113156.png"
-        
-        },
-        
-        {
-                "id": 24,
-                "title": "第24期",
-                "createTime": 1737683230558,
-                "img": "imgs/20250225153617.png"
-        
-        },
-        
-        {
-                "id": 25,
-                "title": "第25期",
-                "createTime": 1740925286899,
-                "img": "imgs/20250303140153.png"
-        
-        },
-        
-        {
-                "id": 26,
-                "title": "第26期",
-                "createTime": 1741615582094,
-                "img": "imgs/20250311100255.png"
-        
-        },
-        
-        {
-                "id": 27,
-                "title": "第27期",
-                "createTime": 1742043288813,
-                "img": "imgs/20250317214223.png"
-        
-        },
-        
-        {
-                "id": 28,
-                "title": "第28期",
-                "createTime": 1742868523343,
-                "img": "imgs/20250325101206.png"
-        
-        }
-
-      ]
+      weeklyData: []
     }
   },
   computed: {
@@ -308,7 +81,7 @@ export default {
     getImagePath(weekly) {
       if (weekly.img && weekly.img !== '') {
         // 使用完整的相对路径构建URL，添加No前缀与文件夹结构保持一致
-        return `./Weekly/No${weekly.id}/${weekly.img}`;
+        return `public/Weekly/No${weekly.id}/${weekly.img}`;
       }
       return '';
     },
@@ -318,25 +91,66 @@ export default {
     },
     initWeeklies() {
       try {
-        // 使用内联数据代替fetch请求
-        this.weeklies = this.weeklyData.sort((a, b) => b.id - a.id);
+        // 获取base URL，确保在不同部署环境下都能正确加载
+        const baseUrl = import.meta.env.BASE_URL || '/';
+        // 构建完整的URL路径，考虑baseUrl配置
+        const weeklyDataUrl = `${baseUrl}public/weekly-list.json`;
+        console.log('尝试加载JSON文件:', weeklyDataUrl);
         
-        // 提取所有年份并去重
-        const yearsSet = new Set();
-        this.weeklies.forEach(weekly => {
-          const date = new Date(weekly.createTime);
-          yearsSet.add(date.getFullYear());
-        });
+        // 使用XMLHttpRequest对象替代fetch，在某些静态部署环境中可能更可靠
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', weeklyDataUrl, true);
         
-        // 将年份数组排序（从新到旧）
-        this.years = Array.from(yearsSet).sort((a, b) => b - a);
+        // 设置响应类型为json
+        xhr.responseType = 'json';
         
-        // 默认选中最新的年份
-        if (this.years.length > 0) {
-          this.activeYear = this.years[0];
-        }
+        // 处理加载完成事件
+        xhr.onload = () => {
+          console.log('XHR状态:', xhr.status, '响应类型:', typeof xhr.response);
+          
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // 获取JSON数据
+            this.weeklyData = xhr.response;
+            // 检查response是否为null
+            if (this.weeklyData) {
+              console.log('成功加载周刊数据，条目数:', this.weeklyData.length);
+              // 按ID降序排序
+              this.weeklies = this.weeklyData.sort((a, b) => b.id - a.id);
+              
+              // 初始化年份数据
+              this.initYearsFromWeeklies();
+            } else {
+              console.error('加载周刊数据失败: 返回数据为null');
+              // 尝试使用备用路径
+              this.loadFallbackData();
+            }
+          } else {
+            console.error(`HTTP错误! 状态码: ${xhr.status}`);
+            // 尝试使用备用路径
+            this.loadFallbackData();
+          }
+        };
+        
+        // 处理错误事件
+        xhr.onerror = (error) => {
+          console.error('加载周刊数据出错:', error);
+          // 尝试使用备用路径
+          this.loadFallbackData();
+        };
+        
+        // 处理超时事件
+        xhr.ontimeout = () => {
+          console.error('加载周刊数据超时');
+          // 尝试使用备用路径
+          this.loadFallbackData();
+        };
+        
+        // 发送请求
+        xhr.send();
       } catch (error) {
         console.error('初始化Weekly列表失败:', error);
+        // 尝试使用备用路径
+        this.loadFallbackData();
       }
     },
     
@@ -351,6 +165,24 @@ export default {
           yearElement.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    },
+    
+    // 从周刊数据中提取年份信息
+    initYearsFromWeeklies() {
+      // 提取所有年份并去重
+      const yearsSet = new Set();
+      this.weeklies.forEach(weekly => {
+        const date = new Date(weekly.createTime);
+        yearsSet.add(date.getFullYear());
+      });
+      
+      // 将年份数组排序（从新到旧）
+      this.years = Array.from(yearsSet).sort((a, b) => b - a);
+      
+      // 默认选中最新的年份
+      if (this.years.length > 0) {
+        this.activeYear = this.years[0];
+      }
     }
   }
 }
@@ -564,3 +396,61 @@ export default {
   }
 }
 </style>
+
+
+// 加载备用数据的方法
+loadFallbackData() {
+  console.log('尝试加载备用数据路径');
+  // 尝试不同的路径格式
+  const fallbackUrls = [
+    './Weekly/weeklyData.json',
+    '../Weekly/weeklyData.json',
+    '/Weekly/weeklyData.json'
+  ];
+  
+  // 尝试加载第一个备用URL
+  this.tryLoadFallbackUrl(fallbackUrls, 0);
+},
+
+// 递归尝试加载备用URL
+tryLoadFallbackUrl(urls, index) {
+  if (index >= urls.length) {
+    console.error('所有备用路径均加载失败');
+    // 如果本地有缓存数据则使用
+    if (this.weeklyData && Array.isArray(this.weeklyData) && this.weeklyData.length > 0) {
+      console.log('使用本地缓存数据');
+      this.weeklies = this.weeklyData.sort((a, b) => b.id - a.id);
+      this.initYearsFromWeeklies();
+    } else {
+      console.error('无可用数据，显示空列表');
+      this.weeklies = [];
+    }
+    return;
+  }
+  
+  const url = urls[index];
+  console.log(`尝试加载备用路径 (${index + 1}/${urls.length}):`, url);
+  
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'json';
+  
+  xhr.onload = () => {
+    if (xhr.status >= 200 && xhr.status < 300 && xhr.response) {
+      console.log(`备用路径 ${url} 加载成功`);
+      this.weeklyData = xhr.response;
+      this.weeklies = this.weeklyData.sort((a, b) => b.id - a.id);
+      this.initYearsFromWeeklies();
+    } else {
+      console.log(`备用路径 ${url} 加载失败，尝试下一个`);
+      this.tryLoadFallbackUrl(urls, index + 1);
+    }
+  };
+  
+  xhr.onerror = () => {
+    console.log(`备用路径 ${url} 加载出错，尝试下一个`);
+    this.tryLoadFallbackUrl(urls, index + 1);
+  };
+  
+  xhr.send();
+},

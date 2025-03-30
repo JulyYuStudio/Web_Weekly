@@ -14,7 +14,7 @@ cd static
 
 # 初始化git仓库
 git init
-# git remote add origin git@github.com:lifelikejuly/Web_Weekly.git
+git remote add origin git@github.com:JulyYuStudio/Web_Weekly.git
 
 # 创建main分支
 # git checkout -b main

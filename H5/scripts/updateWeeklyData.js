@@ -1,6 +1,6 @@
 /**
- * 自动更新Home.vue中的weeklyData数组
- * 该脚本会在项目启动时运行，从Weekly目录中读取最新的周刊数据
+ * 自动生成周刊数据JSON文件
+ * 该脚本会在项目启动时运行，从Weekly目录中读取最新的周刊数据，并生成JSON文件
  */
 
 const fs = require('fs');
@@ -8,8 +8,8 @@ const path = require('path');
 
 // 获取Weekly目录路径
 const weeklyDir = path.resolve(__dirname, '../../Weekly');
-// Home.vue文件路径
-const homeVuePath = path.resolve(__dirname, '../src/views/Home.vue');
+// 周刊数据JSON文件路径
+const weeklyDataJsonPath = path.resolve(weeklyDir, 'weeklyData.json');
 
 /**
  * 从Weekly目录中读取周刊数据
@@ -50,6 +50,7 @@ function getWeeklyData() {
           
           // 添加到周刊列表
           const id = parseInt(folder.replace('No', ''));
+          console.log(id + " " + createTime + " " + imgFile);
           weeklyList.push({
             id,
             title: `第${id}期`,
@@ -68,36 +69,23 @@ function getWeeklyData() {
 }
 
 /**
- * 更新Home.vue文件中的weeklyData数组
+ * 将周刊数据保存为JSON文件
  * @param {Array} weeklyData 周刊数据数组
  */
-function updateHomeVue(weeklyData) {
-  // 读取Home.vue文件内容
-  let homeVueContent = fs.readFileSync(homeVuePath, 'utf-8');
+function saveWeeklyDataJson(weeklyData) {
+  // 将weeklyData数组转换为格式化的JSON字符串
+  const weeklyDataStr = JSON.stringify(weeklyData, null, 4);
   
-  // 将weeklyData数组转换为格式化的字符串
-  const weeklyDataStr = JSON.stringify(weeklyData, null, 8)
-    .replace(/^\[/g, '[')
-    .replace(/\]$/g, '\n      ]')
-    .replace(/\{/g, '\n        {')
-    .replace(/\}/g, '\n        }')
-    .replace(/"([^"]+)":/g, '"$1":');
-  console.log("----------- " + weeklyDataStr);
-  // 使用正则表达式替换weeklyData数组
-  // 修改正则表达式，使用更精确的匹配模式，避免生成嵌套的方括号
-  const regex = /(weeklyData:\s*\[)[\s\S]*?(\s*\](?=\s*}\s*data\(\)|\s*}\s*,))/;
-  const newContent = homeVueContent.replace(regex, `$1${weeklyDataStr}$2`);
+  // 写入JSON文件
+  fs.writeFileSync(weeklyDataJsonPath, weeklyDataStr, 'utf-8');
   
-  // 写入更新后的内容
-  fs.writeFileSync(homeVuePath, newContent, 'utf-8');
-  
-  console.log('Home.vue中的weeklyData数组已更新');
+  console.log('周刊数据已保存到JSON文件:', weeklyDataJsonPath);
 }
 
 // 执行更新
 try {
   const weeklyData = getWeeklyData();
-  updateHomeVue(weeklyData);
+  saveWeeklyDataJson(weeklyData);
 } catch (error) {
-  console.error('更新weeklyData数组失败:', error);
+  console.error('生成周刊数据JSON文件失败:', error);
 }

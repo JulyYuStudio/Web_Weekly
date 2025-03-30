@@ -78,8 +78,8 @@ export default {
       // 获取base URL，确保在不同部署环境下都能正确跳转
       const baseUrl = import.meta.env.BASE_URL || '/';
       // 构建完整的URL路径，考虑baseUrl配置
-      const weeklyUrl = `${baseUrl}Weekly/No${this.id}/No${this.id}.md`;
-      
+      const weeklyUrl = `${baseUrl}public/Weekly/No${this.id}/No${this.id}.md`;
+      console.log('Fetching content from:', weeklyUrl);
       // 使用XMLHttpRequest对象替代fetch，在某些静态部署环境中可能更可靠
       const xhr = new XMLHttpRequest();
       xhr.open('GET', weeklyUrl, true);

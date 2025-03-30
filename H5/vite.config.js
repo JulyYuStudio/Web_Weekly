@@ -4,7 +4,6 @@ import path from 'path'
 import fs from 'fs'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
-import updateWeeklyDataPlugin from './scripts/updateWeeklyPlugin'
 
 // 自定义插件：复制Weekly目录下的markdown文件到public目录并预生成HTML文件
 function copyWeeklyFiles() {
@@ -12,10 +11,13 @@ function copyWeeklyFiles() {
     name: 'copy-weekly-files',
     buildStart() {
       // 确保public/Weekly目录存在
-      const publicWeeklyDir = path.resolve(__dirname, 'Weekly')
-      if (!fs.existsSync(path.resolve(__dirname, 'Weekly'))) {
-        fs.mkdirSync(path.resolve(__dirname, 'Weekly'))
+      const publicDir = path.resolve(__dirname, 'public')
+      if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir)
       }
+      const publicWeeklyDir = path.resolve(publicDir, 'Weekly')
+
+      console.log("publicWeeklyDir >>>> " + publicWeeklyDir);
       if (!fs.existsSync(publicWeeklyDir)) {
         fs.mkdirSync(publicWeeklyDir)
       }
@@ -47,30 +49,8 @@ function copyWeeklyFiles() {
             // 复制markdown文件
             const mdFile = path.join(folderPath, `${folder}.md`)
             if (fs.existsSync(mdFile)) {
+              fs.copyFileSync(mdFile, path.join(targetDir, `${folder}.md`))
 
-              // 读取markdown内容并转换为HTML
-              const mdContent = fs.readFileSync(mdFile, 'utf-8')
-              
-              // 配置marked以使用highlight.js进行代码高亮
-              marked.setOptions({
-                highlight: function(code, lang) {
-                  if (lang && hljs.getLanguage(lang)) {
-                    return hljs.highlight(code, { language: lang }).value;
-                  }
-                  return hljs.highlightAuto(code).value;
-                },
-                breaks: true
-              })
-              
-              // 处理图片路径，将相对路径转换为绝对路径
-              const processedContent = mdContent.replace(
-                /!\[(.*?)\]\((imgs\/.*?)\)/g,
-                `![$1](./Weekly/${folder}/$2)`
-              )
-              
-              // 转换为HTML并保存
-              const htmlContent = marked(processedContent)
-              fs.writeFileSync(path.join(targetDir, `${folder}.html`), htmlContent)
               // 获取到markdown文件的创建时间
               const createTime = fs.statSync(mdFile).birthtime.getTime()
               
@@ -101,6 +81,7 @@ function copyWeeklyFiles() {
 
               // 添加到weekly列表
               const id = parseInt(folder.replace('No', ''))
+              // console.log(id + " " + createTime + " " + imgFile);
               weeklyList.push({
                 id,
                 title: `第${id}期`,
@@ -118,17 +99,17 @@ function copyWeeklyFiles() {
       
       // 生成weekly-list.json文件
       fs.writeFileSync(
-        path.join(publicWeeklyDir, 'weekly-list.json'),
+        path.join(publicDir, 'weekly-list.json'),
         JSON.stringify(weeklyList, null, 2)
       )
       
-      console.log('Weekly files copied and weekly-list.json generated')
+      console.log('Weekly files copied and weekly-list.json generated' + path.join(publicWeeklyDir, 'weekly-list.json'))
     }
   }
 }
 
 export default defineConfig({
-  plugins: [vue(), copyWeeklyFiles(), updateWeeklyDataPlugin()],
+  plugins: [vue(), copyWeeklyFiles()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')

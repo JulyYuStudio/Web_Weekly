@@ -21,7 +21,7 @@ function copyWeeklyFiles() {
       }
       
       // 获取Weekly目录路径
-      const weeklyDir = path.resolve(__dirname, '../Weekly')
+      const weeklyDir = path.resolve(__dirname, '../docs/Weekly')
       
       // 读取Weekly目录下的所有文件夹
       const folders = fs.readdirSync(weeklyDir)
@@ -94,13 +94,13 @@ function copyWeeklyFiles() {
       
       // 按ID排序
       weeklyList.sort((a, b) => a.id - b.id)
-      
+      jsonPath = path.join(publicWeeklyDir, 'weekly-list.json')
       // 生成weekly-list.json文件
       fs.writeFileSync(
-        path.join(publicDir, 'weekly-list.json'),
+        jsonPath,
         JSON.stringify(weeklyList, null, 2)
       )
-      
+      fs.copyFileSync(jsonPath, path.resolve(__dirname,"../docs/weekly-list.json"))
       console.log('Weekly files copied and weekly-list.json generated' + path.join(publicWeeklyDir, 'weekly-list.json'))
     }
   }

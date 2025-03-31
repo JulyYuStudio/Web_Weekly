@@ -81,7 +81,7 @@ export default {
     getImagePath(weekly) {
       if (weekly.img && weekly.img !== '') {
         // 使用完整的相对路径构建URL，添加No前缀与文件夹结构保持一致
-        return `public/Weekly/No${weekly.id}/${weekly.img}`;
+        return `Weekly/No${weekly.id}/${weekly.img}`;
       }
       return '';
     },
@@ -94,7 +94,7 @@ export default {
         // 获取base URL，确保在不同部署环境下都能正确加载
         const baseUrl = import.meta.env.BASE_URL || '/';
         // 构建完整的URL路径，考虑baseUrl配置
-        const weeklyDataUrl = `${baseUrl}public/weekly-list.json`;
+        const weeklyDataUrl = `${baseUrl}weekly-list.json`;
         console.log('尝试加载JSON文件:', weeklyDataUrl);
         
         // 使用XMLHttpRequest对象替代fetch，在某些静态部署环境中可能更可靠
@@ -121,36 +121,25 @@ export default {
               this.initYearsFromWeeklies();
             } else {
               console.error('加载周刊数据失败: 返回数据为null');
-              // 尝试使用备用路径
-              this.loadFallbackData();
             }
           } else {
             console.error(`HTTP错误! 状态码: ${xhr.status}`);
-            // 尝试使用备用路径
-            this.loadFallbackData();
           }
         };
         
         // 处理错误事件
         xhr.onerror = (error) => {
           console.error('加载周刊数据出错:', error);
-          // 尝试使用备用路径
-          this.loadFallbackData();
         };
         
         // 处理超时事件
         xhr.ontimeout = () => {
           console.error('加载周刊数据超时');
-          // 尝试使用备用路径
-          this.loadFallbackData();
         };
-        
         // 发送请求
         xhr.send();
       } catch (error) {
         console.error('初始化Weekly列表失败:', error);
-        // 尝试使用备用路径
-        this.loadFallbackData();
       }
     },
     
@@ -397,60 +386,3 @@ export default {
 }
 </style>
 
-
-// 加载备用数据的方法
-loadFallbackData() {
-  console.log('尝试加载备用数据路径');
-  // 尝试不同的路径格式
-  const fallbackUrls = [
-    './Weekly/weeklyData.json',
-    '../Weekly/weeklyData.json',
-    '/Weekly/weeklyData.json'
-  ];
-  
-  // 尝试加载第一个备用URL
-  this.tryLoadFallbackUrl(fallbackUrls, 0);
-},
-
-// 递归尝试加载备用URL
-tryLoadFallbackUrl(urls, index) {
-  if (index >= urls.length) {
-    console.error('所有备用路径均加载失败');
-    // 如果本地有缓存数据则使用
-    if (this.weeklyData && Array.isArray(this.weeklyData) && this.weeklyData.length > 0) {
-      console.log('使用本地缓存数据');
-      this.weeklies = this.weeklyData.sort((a, b) => b.id - a.id);
-      this.initYearsFromWeeklies();
-    } else {
-      console.error('无可用数据，显示空列表');
-      this.weeklies = [];
-    }
-    return;
-  }
-  
-  const url = urls[index];
-  console.log(`尝试加载备用路径 (${index + 1}/${urls.length}):`, url);
-  
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  
-  xhr.onload = () => {
-    if (xhr.status >= 200 && xhr.status < 300 && xhr.response) {
-      console.log(`备用路径 ${url} 加载成功`);
-      this.weeklyData = xhr.response;
-      this.weeklies = this.weeklyData.sort((a, b) => b.id - a.id);
-      this.initYearsFromWeeklies();
-    } else {
-      console.log(`备用路径 ${url} 加载失败，尝试下一个`);
-      this.tryLoadFallbackUrl(urls, index + 1);
-    }
-  };
-  
-  xhr.onerror = () => {
-    console.log(`备用路径 ${url} 加载出错，尝试下一个`);
-    this.tryLoadFallbackUrl(urls, index + 1);
-  };
-  
-  xhr.send();
-},

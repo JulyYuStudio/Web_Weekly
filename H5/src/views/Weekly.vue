@@ -78,7 +78,7 @@ export default {
       // 获取base URL，确保在不同部署环境下都能正确跳转
       const baseUrl = import.meta.env.BASE_URL || '/';
       // 构建完整的URL路径，考虑baseUrl配置
-      const weeklyUrl = `${baseUrl}public/Weekly/No${this.id}/No${this.id}.md`;
+      const weeklyUrl = `${baseUrl}Weekly/No${this.id}/No${this.id}.md`;
       console.log('Fetching content from:', weeklyUrl);
       // 使用XMLHttpRequest对象替代fetch，在某些静态部署环境中可能更可靠
       const xhr = new XMLHttpRequest();
@@ -179,7 +179,7 @@ export default {
       // 获取base URL
       const baseUrl = import.meta.env.BASE_URL || '/';
       // 构建周刊目录的基础路径
-      const weeklyBasePath = `${baseUrl}public/Weekly/No${this.id}/`;
+      const weeklyBasePath = `${baseUrl}Weekly/No${this.id}/`;
       
       // 替换相对路径的图片引用
       // 将 <img src="imgs/xxx.png" 替换为 <img src="./Weekly/No{id}/imgs/xxx.png"

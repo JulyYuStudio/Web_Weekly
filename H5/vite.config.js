@@ -2,8 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import fs from 'fs'
-import { marked } from 'marked'
-import hljs from 'highlight.js'
 
 // 自定义插件：复制Weekly目录下的markdown文件到public目录并预生成HTML文件
 function copyWeeklyFiles() {
@@ -11,7 +9,7 @@ function copyWeeklyFiles() {
     name: 'copy-weekly-files',
     buildStart() {
       // 确保public/Weekly目录存在
-      const publicDir = path.resolve(__dirname, 'public')
+      const publicDir = path.resolve(__dirname)
       if (!fs.existsSync(publicDir)) {
         fs.mkdirSync(publicDir)
       }
@@ -119,7 +117,7 @@ export default defineConfig({
     port: 3000
   },
   build: {
-    outDir: 'static/docs'
+    outDir: '../docs'
   },
   base: '/Web_Weekly/'
 })

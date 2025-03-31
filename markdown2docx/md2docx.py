@@ -77,11 +77,11 @@ def read_markdown_file(file_path,write,writeEnd):
                         if isArtiles: 
                             line = line.replace('* ', "").strip()
                             results = match_markdown_links(line.strip())
-                            newline = template.templateRedLi.substitute(li = '📄' + results[0][0])
+                            newline = template.templateRedLi.substitute({'li': '📄' + results[0][0],'url':results[0][1]})
                             # write(newline)
                             artContents += newline.strip()
-                            url = template.templateRedUrl.substitute(url = results[0][1])
-                            artContents += url.strip()
+                            # url = template.templateRedUrl.substitute(url = results[0][1])
+                            # artContents += url.strip()
                             # print(f"isArtiles ===> {newline} ")
                         else:
                         ## 其他主题内容

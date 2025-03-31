@@ -179,7 +179,7 @@ export default {
       // 获取base URL
       const baseUrl = import.meta.env.BASE_URL || '/';
       // 构建周刊目录的基础路径
-      const weeklyBasePath = `${baseUrl}Weekly/No${this.id}/`;
+      const weeklyBasePath = `${baseUrl}public/Weekly/No${this.id}/`;
       
       // 替换相对路径的图片引用
       // 将 <img src="imgs/xxx.png" 替换为 <img src="./Weekly/No{id}/imgs/xxx.png"

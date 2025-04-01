@@ -12,6 +12,8 @@
 
 # echo "## Weekly History" > README.md
 # done > README.md
+
+echo "## Weekly History"
 find Weekly -name "*.md" -type f | sort -V | while read file; do
     # 输出文件路径
     echo "* [周刊$(basename "$file" .md)]($file)"

@@ -7,9 +7,10 @@ const fs = require('fs');
 const path = require('path');
 
 // 获取Weekly目录路径
-const weeklyDir = path.resolve(__dirname, '../../Weekly');
+const weeklyDir = path.resolve(__dirname, '../../docs/Weekly');
+const weeklyDocsDir = path.resolve(__dirname, '../../docs');
 // 周刊数据JSON文件路径
-const weeklyDataJsonPath = path.resolve(weeklyDir, 'weeklyData.json');
+const weeklyDataJsonPath = path.resolve(weeklyDocsDir, 'weekly-list.json');
 
 /**
  * 从Weekly目录中读取周刊数据

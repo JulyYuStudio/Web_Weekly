@@ -9,3 +9,6 @@ auto_create_markdoc.sh
 ```
 sh auto_create_markdoc.sh 27
 ```
+
+## 图片资源压缩
+减小库大小

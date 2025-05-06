@@ -7,6 +7,7 @@ echo 生成周刊第${inputArg1}期中...
 
 cd markdown2docx
 ## 激活环境
+python3 -m venv myenv
 source myenv/bin/activate
 
 out_name=余小余周刊-第${inputArg1}期

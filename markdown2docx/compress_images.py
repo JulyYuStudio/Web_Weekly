@@ -10,7 +10,7 @@ def compress_images(input_path):
     """
     压缩指定目录下的所有图片并覆盖原文件
     """
-    with open('/Volumes/JulyKit/AllProjects/Docs/Weekly/tinify_key', 'r') as f:
+    with open('/Volumes/JulyKit/AllProjects/Fronts/Weekly/tinify_key', 'r') as f:
         tinify.key = f.read().strip()
     
     for root, _, files in os.walk(input_path):

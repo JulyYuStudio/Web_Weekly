@@ -106,8 +106,8 @@ def read_markdown_file(file_path,write,writeEnd):
                                 write(newLine.strip())
 
             writeEnd()        
-    except FileNotFoundError:
-        print(f"Error: The file '{file_path}' was not found.")
+    except FileNotFoundError as e:
+        print(f"Error: The file '{file_path}' was not found.: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 

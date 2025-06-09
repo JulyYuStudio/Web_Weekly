@@ -16,4 +16,6 @@ python3 compress_images.py -input_path ../docs/Weekly/No$inputArg1
 python3 md2docx.py -input_path ../docs/Weekly/No$inputArg1/No$inputArg1.md -output_name $out_name
 echo "生成周刊第{$inputArg1}期[结束]"
 
+echo "更新weekly-list"
+node ../H5/scripts/updateWeeklyData.js
 deactivate

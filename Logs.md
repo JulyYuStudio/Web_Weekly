@@ -13,3 +13,6 @@ sh auto_create_markdoc.sh 27
 ## 图片资源压缩
 compress_all_image.sh
 压缩所有图片资源
+
+## TODO 
+* 支持自动发小红书

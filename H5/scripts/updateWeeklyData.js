@@ -51,7 +51,7 @@ function getWeeklyData() {
           
           // 添加到周刊列表
           const id = parseInt(folder.replace('No', ''));
-          console.log(id + " " + createTime + " " + imgFile);
+          // console.log(id + " " + createTime + " " + imgFile);
           weeklyList.push({
             id,
             title: `第${id}期`,

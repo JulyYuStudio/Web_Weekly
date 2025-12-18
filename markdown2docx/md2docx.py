@@ -42,6 +42,7 @@ def write_content(text):
     document.add_paragraph(text)
 
 def write_pic(path):
+    print(f" write_pic path ===> {path} ")
     document.add_picture(path)
 
 def write_end():
@@ -100,11 +101,28 @@ def read_markdown_file(file_path,write,writeEnd):
                                 write(url.strip())
                             elif (line.strip().startswith('![')):
                                 imgPath = match_markdown_images(line)
+                                print(f"file_path ===> {file_path.rsplit('/', 1)[0]} {file_path}")
                                 write_pic(file_path.rsplit('/', 1)[0]+ "/" + imgPath[0][1])
                             else:
                                 newLine = template.templateContent.substitute(content = line.strip())
                                 write(newLine.strip())
-
+            write('<br/>')
+            write('<br/>')
+            # write(template.templateDividerLine.strip())
+            # write(template.templateWXCard.strip())
+            # write(template.templateDividerLine.strip()) 
+            ## 宣传语 
+            write(template.templateDividerLine) 
+            write(template.templateMiddleTitle.substitute(content = "你的关注是我更新的最大动力😙，💪🏻基本每周更新~").strip())
+            write(template.templateDividerLine) 
+            ## 公众号的二维码
+            # 1. 获取脚本目录
+            # script_dir = os.path.dirname(os.path.abspath(__file__))
+            # 2. 拼接兄弟目录的图片路径（project/data/img/chart.png）
+            # img_path = os.path.join(script_dir, "..",  "docs","wchat", "julystudio.jpg")
+            # img_path = os.path.abspath(img_path)
+            write(template.templateWXCard)
+            write_pic("../docs/wchat/julystudio.jpg")
             writeEnd()        
     except FileNotFoundError as e:
         print(f"Error: The file '{file_path}' was not found.: {e}")

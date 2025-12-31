@@ -1,9 +1,7 @@
 #!/bin/bash
 
 inputArg1=$1
-echo ${inputArg1}期中...
 echo 生成周刊第${inputArg1}期中...
-
 
 cd markdown2docx
 ## 激活环境

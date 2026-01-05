@@ -62,14 +62,14 @@ def read_markdown_file(file_path,write,writeEnd):
                     if(line.startswith('## ')):
                         title = line.replace('## ', "").strip()
                         # 是文章标题情况下
-                        if(title == '📖好文章'):
+                        if(title == '📕 精选文章'):
                             isArtiles = True
                         else: 
                             if isArtiles: 
                                 content = template.templateRedUl.substitute(ul = artContents)
                                 write(content.strip())
                             isArtiles = False
-                        newline = template.templateRedTitleH2.substitute(h2 = title)
+                        newline = template.templateTitleH2.substitute(h2 = title)
                         ## 写主题TXT
                         write(newline.strip())
                     ## 内容部分
@@ -78,7 +78,7 @@ def read_markdown_file(file_path,write,writeEnd):
                         if isArtiles: 
                             line = line.replace('* ', "").strip()
                             results = match_markdown_links(line.strip())
-                            newline = template.templateRedLi.substitute({'li': '📄' + results[0][0],'url':results[0][1]})
+                            newline = template.templateArtileLi.substitute({'li': '📄' + results[0][0],'url':'🔗【' +results[0][1]+'】'})
                             # write(newline)
                             artContents += newline.strip()
                             # url = template.templateRedUrl.substitute(url = results[0][1])
@@ -89,7 +89,7 @@ def read_markdown_file(file_path,write,writeEnd):
                             if(line.startswith('**')):
                                 # print(f"title ===> {line} ")
                                 title = line.replace('*', "").strip()
-                                title = template.templateRedTitleH3.substitute(h3 = title)
+                                title = template.templateTitleBgH3.substitute(h3 = '# ' + title)
                                 write(title.strip())
                             elif (line.strip().startswith('* [')):
                                 line = line.replace('* ', "").strip()
@@ -97,7 +97,7 @@ def read_markdown_file(file_path,write,writeEnd):
                                 write(results[0][0] + ":" + results[0][1])    
                             elif is_url(line):
                                 # print(f"is_url ===> {line} ")
-                                url = template.templateRedUrl.substitute(url = line)
+                                url = template.templateNetUrl.substitute(url = '🔗【' + line + '】')
                                 write(url.strip())
                             elif (line.strip().startswith('![')):
                                 imgPath = match_markdown_images(line)
@@ -113,7 +113,7 @@ def read_markdown_file(file_path,write,writeEnd):
             # write(template.templateDividerLine.strip()) 
             ## 宣传语 
             write(template.templateDividerLine) 
-            write(template.templateMiddleTitle.substitute(content = "你的关注是我更新的最大动力😙，💪🏻基本每周更新~").strip())
+            write(template.templateMiddleTitle.substitute(content = "你的关注是我更新的最大动力😙\n💪🏻基本每周更新~").strip())
             write(template.templateDividerLine) 
             ## 公众号的二维码
             # 1. 获取脚本目录

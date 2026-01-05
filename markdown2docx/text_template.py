@@ -5,16 +5,16 @@ templateRedTitleH2 = Template('''<h2 data-tool="mdnice编辑器" style="margin-t
 
 templateRedUl = Template('''<ul data-tool="mdnice编辑器" style="margin-top: 4px; margin-bottom: 4px; padding-left: 25px; color: black; list-style-type: disc;">$ul</ul>''')
 
-templateRedLi = Template('''<li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;">$li</section><p data-tool="mdnice编辑器" style="font-size: 15px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(89,89,89);"><strong style="font-weight: bold; color: rgb(71, 193, 168);">$url</strong></p></li>''')
+templateRedLi = Template('''<li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;">$li</section><p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(89,89,89);"><strong style="font-weight: bold; color: rgb(71, 193, 168);">$url</strong></p></li>''')
 
-templateRedTitleH3 = Template('''<h3 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; font-size: 20px; color: rgb(0,0,0);"><span class="prefix" style="display: none;"></span><span class="content"># $h3</span></h3>''')
+templateRedTitleH3 = Template('''<h3 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 16px; padding: 0px; font-weight: bold; font-size: 20px; color: rgb(0,0,0);"><span class="prefix" style="display: none;"></span><span class="content"># $h3</span></h3>''')
 
-templateRedUrl= Template('''<p data-tool="mdnice编辑器" style="font-size: 15px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(0,0,0);"><strong style="font-weight: bold; color: rgb(71, 193, 168);">$url</strong></p>''')
+templateRedUrl= Template('''<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(0,0,0);"><strong style="font-weight: bold; color: rgb(71, 193, 168);">$url</strong></p>''')
 
-templateContent = Template('''<p data-tool="mdnice编辑器" style="font-size: 15px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 1.5em; color: #333333;">$content</p>''')
+templateContent = Template('''<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 1.5em; color: #333333;">$content</p>''')
 
 
-templateMiddleTitle = Template('''<p data-tool="mdnice编辑器" style="font-size: 15px; padding-top: 8px; padding-bottom: 8px; margin: 0px; line-height: 26px; color: black; text-align: center;"><span leaf="">$content</span></p>''')
+templateMiddleTitle = Template('''<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0px; line-height: 26px; color: black; text-align: center;"><span leaf="">$content</span></p>''')
 
 templateDividerLine = '''<hr style="border-style: solid; border-width: 1px 0 0; border-color: rgba(0,0,0,0.1); -webkit-transform-origin: 0 0; -webkit-transform: scale(1, 0.5); transform-origin: 0 0; transform: scale(1, 0.5);" contenteditable="false" class="">'''
 
@@ -32,8 +32,8 @@ templateTitleH2 = Template('''<h2 data-tool="mdnice编辑器" style="margin-top:
 
 
 
-templateTitleBgH3 = Template('''<h3 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0; font-weight: bold; font-size: 21px; color: #000; display: inline-block;"><span class="prefix" style="display: none;"></span><span class="content" style="padding: 1px 8px; line-height: 1.2; background: linear-gradient(to top, #e9ecef 80%, transparent 80%);background-size: 100% 100%;background-repeat: no-repeat;">$h3</span></h3>''')
+templateTitleBgH3 = Template('''<h3 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0; font-weight: bold; font-size: 22px; color: #000; display: inline-block;"><span class="prefix" style="display: none;"></span><span class="content" style="padding: 1px 8px; line-height: 1.2; background: linear-gradient(to top, #e9ecef 80%, transparent 80%);background-size: 100% 100%;background-repeat: no-repeat;">$h3</span></h3>''')
 
-templateArtileLi = Template('''<li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><span leaf="">$li</span><span leaf="" data-pm-slice="1 1 [&quot;para&quot;,{&quot;tagName&quot;:&quot;p&quot;,&quot;attributes&quot;:{&quot;data-tool&quot;:&quot;mdnice编辑器&quot;,&quot;style&quot;:&quot;font-size: 15px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(89,89,89);&quot;},&quot;namespaceURI&quot;:&quot;http://www.w3.org/1999/xhtml&quot;}]"><span textstyle="" style="font-size: 10px; color: rgb(153, 195, 255); text-decoration: underline">$url</span></span></section></li>''')
+templateArtileLi = Template('''<li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><span leaf="">$li</span><span leaf="" data-pm-slice="1 1 [&quot;para&quot;,{&quot;tagName&quot;:&quot;p&quot;,&quot;attributes&quot;:{&quot;data-tool&quot;:&quot;mdnice编辑器&quot;,&quot;style&quot;:&quot;font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(89,89,89);&quot;},&quot;namespaceURI&quot;:&quot;http://www.w3.org/1999/xhtml&quot;}]"><span textstyle="" style="font-size: 10px; color: rgb(153, 195, 255); text-decoration: underline">$url</span></span></section></li>''')
 
-templateNetUrl = Template('''<p data-tool="mdnice编辑器" style="font-size: 15px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(89,89,89);"><span leaf=""><span textstyle="" style="font-size: 10px; color: #0269c8; text-decoration: underline">$url</span></span></p>''')
+templateNetUrl = Template('''<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: rgb(89,89,89);"><span leaf=""><span textstyle="" style="font-size: 10px; color: #0269c8; text-decoration: underline">$url</span></span></p>''')

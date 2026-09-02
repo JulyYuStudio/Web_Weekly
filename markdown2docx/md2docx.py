@@ -2,7 +2,7 @@
 
 import re
 from docx import Document
-from docx.shared import Inches
+from docx.shared import Inches , Cm , Pt
 import text_template as template
 import argparse
 import os
@@ -68,7 +68,7 @@ def is_url(url):
     return False
 
 def write_content(text):
-    document.add_paragraph(text)
+    paragraph.add_run(text = text.strip())
 
 def write_pic(path):
     debug(f"写入图片路径 ===> {path} ")
@@ -82,8 +82,27 @@ def write_pic(path):
         img_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
         if not any(path.lower().endswith(ext) for ext in img_extensions):
             log(f"文件可能不是图片格式 '{path}'，尝试添加", "WARNING")
-        
-        document.add_picture(path)
+        # 用 document.add_picture() 新建独立段落放图片
+        # 微信编辑器粘贴 docx 时只能识别"独立段落里的图片对象"
+        # inline 嵌在长 HTML 文本 run 里的图片微信识别不到，会丢失
+        # 当前文本 paragraph 就此封口，图片按 markdown 行序穿插在文本流中间
+        # 写完图片后新建空段落供后续 write_content 继续追加文本 run
+        # width=Inches(6) 把图片缩放到页面宽度内（原始尺寸 20+ 英寸会溢出页面）
+        # 显式设置段落零间距 + 单倍行距，覆盖 docDefaults 默认 w:after=200 (10pt段后间距)
+        # 和 w:line=276 (1.15倍行距)，避免段落分隔产生明显视觉换行
+        # 注：曾尝试移除段末 </p> 减少 HTML 换行，但会导致 <p> 未闭合
+        # 微信粘贴时把后续图片段吞进未闭合的 <p> 内，图片不再独立成段，故保留 </p>
+        global paragraph
+        pic_para_count = len(document.paragraphs)
+        document.add_picture(path, width=Inches(6))
+        pic_para = document.paragraphs[pic_para_count]
+        pic_para.paragraph_format.space_before = Pt(0)
+        pic_para.paragraph_format.space_after = Pt(0)
+        pic_para.paragraph_format.line_spacing = 1.0
+        paragraph = document.add_paragraph()
+        paragraph.paragraph_format.space_before = Pt(0)
+        paragraph.paragraph_format.space_after = Pt(0)
+        paragraph.paragraph_format.line_spacing = 1.0
         debug(f"图片添加成功：{path}")
     except FileNotFoundError as e:
         log(f"图片文件未找到 '{path}'：{e}", "ERROR")
@@ -94,7 +113,24 @@ def write_pic(path):
 
 def write_end():
     try:
+        # 删除所有纯空段（无文字、无图片、无 br 的段落）
+        # 这些段只产生段落分隔符（硬回车）但无实际内容
+        # 参考用户提供的 remove_empty_paragraphs 思路（反向遍历避免索引错位）
+        # 但扩展判断：无文字 + 无图片 + 无 br 才删除，避免误删图片段
+        for paragraph in reversed(document.paragraphs):
+            has_text = bool(paragraph.text.strip())
+            has_drawing = bool(paragraph._element.xpath('.//w:drawing'))
+            has_br = bool(paragraph._element.xpath('.//w:br'))
+            if not has_text and not has_drawing and not has_br:
+                p_element = paragraph._element
+                p_element.getparent().remove(p_element)
+
         document.add_page_break()
+        # 给分页符所在段落也设置零间距，避免结尾继承 docDefaults 默认 10pt 段后间距
+        last_para = document.paragraphs[-1]
+        last_para.paragraph_format.space_before = Pt(0)
+        last_para.paragraph_format.space_after = Pt(0)
+        last_para.paragraph_format.line_spacing = 1.0
         
         # 检查输出目录是否存在
         output_path = output_name + '.docx'
@@ -185,6 +221,7 @@ def read_markdown_file(file_path,write,writeEnd):
                                     try:
                                         title = line.replace('*', "").strip()
                                         title = template.templateTitleBgH3.substitute(h3 = '# ' + title)
+                                        write('<br/>')
                                         write(title.strip())
                                     except Exception as e:
                                         log(f"处理加粗标题时发生异常（行 {line_number}）：{e}", "ERROR")
@@ -193,7 +230,9 @@ def read_markdown_file(file_path,write,writeEnd):
                                         line = line.replace('* ', "").strip()
                                         results = match_markdown_links(line)
                                         if results:
-                                            write(results[0][0] + ":" + results[0][1])    
+                                            # 写入链接内容后追加 HTML 换行符
+                                            # 避免连续多个链接挤在同一行，复制到微信后能分行显示
+                                            write(results[0][0] + ":" + results[0][1])
                                         else:
                                             log(f"未找到链接（行 {line_number}）：{line}", "WARNING")
                                     except Exception as e:
@@ -231,7 +270,8 @@ def read_markdown_file(file_path,write,writeEnd):
                 write('<br/>')
                 ## 宣传语 
                 write(template.templateDividerLine) 
-                write(template.templateMiddleTitle.substitute(content = "你的关注是我更新的最大动力😙\n💪🏻基本每周更新~").strip())
+                write(template.templateMiddleTitle.substitute(content = "【你的关注是我更新的最大动力😙】").strip())
+                write(template.templateMiddleTitle.substitute(content = "【💪🏻基本每周更新~】").strip())
                 write(template.templateDividerLine) 
                 ## 公众号的二维码
                 write(template.templateWXCard)
@@ -316,6 +356,12 @@ if __name__ == "__main__":
             log(f"输入文件 '{file_path}' 可能不是Markdown文件！", "WARNING")
         
         document = Document()
+        paragraph = document.add_paragraph()
+        # 同步设置初始段落零间距，与 write_pic 创建的段落保持一致
+        # 避免 docDefaults 默认 w:after=200 (10pt) 让首段与图片段之间产生视觉间距
+        paragraph.paragraph_format.space_before = Pt(0)
+        paragraph.paragraph_format.space_after = Pt(0)
+        paragraph.paragraph_format.line_spacing = 1.0
         read_markdown_file(file_path,write_content,write_end)
         log(f"转换完成：{output_name}.docx", "SUCCESS")
     except Exception as e:

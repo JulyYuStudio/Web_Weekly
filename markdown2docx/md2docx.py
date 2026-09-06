@@ -3,6 +3,7 @@
 import re
 from docx import Document
 from docx.shared import Inches , Cm , Pt
+from docx.enum.text import WD_LINE_SPACING
 import text_template as template
 import argparse
 import os
@@ -90,19 +91,40 @@ def write_pic(path):
         # width=Inches(6) 把图片缩放到页面宽度内（原始尺寸 20+ 英寸会溢出页面）
         # 显式设置段落零间距 + 单倍行距，覆盖 docDefaults 默认 w:after=200 (10pt段后间距)
         # 和 w:line=276 (1.15倍行距)，避免段落分隔产生明显视觉换行
-        # 注：曾尝试移除段末 </p> 减少 HTML 换行，但会导致 <p> 未闭合
-        # 微信粘贴时把后续图片段吞进未闭合的 <p> 内，图片不再独立成段，故保留 </p>
         global paragraph
+        # 移除当前文本段末尾的块级 HTML 闭合标签和换行标签
+        # 包括 </p>、</h1>~</h6>、</div>、</ul>、</blockquote>、<br/>、<br>
+        # 微信粘贴时这些标签会渲染为段落换行，导致图片前出现空行占位
+        # 由于图片是独立段落（document.add_picture 新建段），不会被吞进未闭合的标签
+        # 移除后图片紧跟文本内容，无 HTML 层面的段落换行
+        # 注意：</section> 是微信卡片闭合标签，不能移除，否则破坏卡片结构
+        if paragraph.runs:
+            # 从后往前找 run，找到末尾带换行/块级闭合标签的 run 进行处理
+            close_tags = ['</p>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>',
+                          '</div>', '</ul>', '</ol>', '</blockquote>', '<br/>', '<br>']
+            for r in reversed(paragraph.runs):
+                for tag in close_tags:
+                    if r.text.endswith(tag):
+                        r.text = r.text[:-len(tag)]
+                        break
+                else:
+                    continue
+                break
         pic_para_count = len(document.paragraphs)
         document.add_picture(path, width=Inches(6))
         pic_para = document.paragraphs[pic_para_count]
         pic_para.paragraph_format.space_before = Pt(0)
         pic_para.paragraph_format.space_after = Pt(0)
-        pic_para.paragraph_format.line_spacing = 1.0
+        # 图片段行距设为 0，消除段落分隔符（</w:p>）产生的视觉换行高度
+        # line=0 + atLeast：图片撑开行高正常显示，空的段落分隔符行高度为0
+        # 这样图片紧贴前一段文本，无多余换行；同时图片仍是独立段落，微信能识别
+        pic_para.paragraph_format.line_spacing = 0
+        pic_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.AT_LEAST
         paragraph = document.add_paragraph()
         paragraph.paragraph_format.space_before = Pt(0)
         paragraph.paragraph_format.space_after = Pt(0)
-        paragraph.paragraph_format.line_spacing = 1.0
+        paragraph.paragraph_format.line_spacing = 0
+        paragraph.paragraph_format.line_spacing_rule = WD_LINE_SPACING.AT_LEAST
         debug(f"图片添加成功：{path}")
     except FileNotFoundError as e:
         log(f"图片文件未找到 '{path}'：{e}", "ERROR")
@@ -130,7 +152,8 @@ def write_end():
         last_para = document.paragraphs[-1]
         last_para.paragraph_format.space_before = Pt(0)
         last_para.paragraph_format.space_after = Pt(0)
-        last_para.paragraph_format.line_spacing = 1.0
+        last_para.paragraph_format.line_spacing = 0
+        last_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.AT_LEAST
         
         # 检查输出目录是否存在
         output_path = output_name + '.docx'
@@ -358,10 +381,12 @@ if __name__ == "__main__":
         document = Document()
         paragraph = document.add_paragraph()
         # 同步设置初始段落零间距，与 write_pic 创建的段落保持一致
-        # 避免 docDefaults 默认 w:after=200 (10pt) 让首段与图片段之间产生视觉间距
+        # line=0 + atLeast：文字行高由内容撑开（正常显示），段落分隔符空行高度为0
+        # 消除 docDefaults 默认 w:after=200 (10pt) 和 w:line=276 (1.15倍行距) 的视觉间距
         paragraph.paragraph_format.space_before = Pt(0)
         paragraph.paragraph_format.space_after = Pt(0)
-        paragraph.paragraph_format.line_spacing = 1.0
+        paragraph.paragraph_format.line_spacing = 0
+        paragraph.paragraph_format.line_spacing_rule = WD_LINE_SPACING.AT_LEAST
         read_markdown_file(file_path,write_content,write_end)
         log(f"转换完成：{output_name}.docx", "SUCCESS")
     except Exception as e:
